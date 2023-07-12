@@ -1,39 +1,27 @@
 class Deck { // create initial deck
-    constructor(suit, value, character) {
+    constructor() {
        let cardDeck = [];
        let suits = ['spade', 'heart', 'diamond', 'club'];
 
         for (let i = 0; i < suits.length; i++) { // loop through suits array
             let character = '';
             for (let j = 2; j <= 14; j++) { // loop through values array
-                // character = () => {
-                //     switch (j) {
-                //         case 11:
-                //             return 'Joker'
-                //         case 12:
-                //             return 'Queen'
-                //         case 13:
-                //             return 'King'
-                //         case 14:
-                //             return 'Ace'
-                //         default:
-                //             return 'j'
-                //     }
-                // }
-
-
-                    switch (j) {
-                        case 11:
-                            character = 'Joker'
-                        case 12:
-                            character = 'Queen'
-                        case 13:
-                            character = 'King'
-                        case 14:
-                            character = 'Ace'
-                        default:
-                            character = j
-                    }
+                switch (j) {
+                    case 11:
+                        character = 'Joker'
+                        break;
+                    case 12:
+                        character = 'Queen'
+                        break;
+                    case 13:
+                        character = 'King'
+                        break;
+                    case 14:
+                        character = 'Ace'
+                        break;
+                    default:
+                        character = j
+                }
 
                 let card = { // create a card object to push onto the deck array
                     suit: suits[i],
@@ -41,10 +29,11 @@ class Deck { // create initial deck
                     character: character
                 }
 
-                cardDeck.push(this.card);
-                console.log("deck: " + deck.cardDeck);
+                cardDeck.push(card);
             }
         }
+        console.log("deck before shuffle: " + JSON.stringify(cardDeck));
+
 
         // shuffle deck
         // Math.random gives a floating point >0 and <1
@@ -53,12 +42,14 @@ class Deck { // create initial deck
         // This is a the Fisher Yates Method for shuffling an array
         // It shuffles the list in place starting with the last element of the array
         // The last item becomes a random index value and the random index becomes what was in i, then it repeats with the next index to the left and so on till it reaches iindex 0
-        for (let k = deck.cardDeck.length; k > 0; k--) {
-            var randomIndex = Math.floor(Math.random) * (k + 1)
-            var hold = cardDeck[k]; // save original value for swap
-            cardDeck[k] = cardDeck[randomIndex] // make current value of i = the random index's value
+        for (let i = cardDeck.length; i > 0; i--) {
+            var randomIndex = Math.floor(Math.random) * (i + 1)
+            var hold = cardDeck[i]; // save original value for swap
+            cardDeck[i] = cardDeck[randomIndex] // make current value of i = the random index's value
             cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
         }
+        console.log("shuffled deck: " + JSON.stringify(cardDeck));
+        return cardDeck;
     }
 }
 
@@ -96,6 +87,32 @@ class Players {
 
 // main game logic
 let deck = new Deck; // create new instance of Deck
+console.log("deck: " + JSON.stringify(cardDeck));
+
+// shuffleDeck = () => {
+//     // shuffle deck
+//     // Math.random gives a floating point >0 and <1
+//     // Math.floor gives you a rounded up whole number
+//     // Multiplying by array length will give you an index from 0 to the length of the array
+//     // This is a the Fisher Yates Method for shuffling an array
+//     // It shuffles the list in place starting with the last element of the array
+//     // The last item becomes a random index value and the random index becomes what was in i, then it repeats with the next index to the left and so on till it reaches iindex 0
+//     for (let i = deck.cardDeck.length; i > 0; i--) {
+//         var randomIndex = Math.floor(Math.random) * (i + 1)
+//         var hold = cardDeck[i]; // save original value for swap
+//         cardDeck[i] = cardDeck[randomIndex] // make current value of i = the random index's value
+//         cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
+//     }
+// }
+
+// console.log("deck before shuffle: " + JSON.stringify(deck.cardDeck));
+
+// shuffleDeck();
+
+// console.log("shuffled deck: " + JSON.stringify(deck.cardDeck));
+
+// Use console.log(JSON.stringify(result)) to get the JSON in a string format.
+
 let players = new Players;
 // console.log("deck: " + deck.cardDeck);
 // console.log("array length: " + deck.cardDeck.length);
