@@ -1,54 +1,53 @@
 class Deck { // create initial deck
     constructor() {
-       let cardDeck = [];
-       let suits = ['spade', 'heart', 'diamond', 'club'];
+       this.cardDeck = [];
+       this.suits = ['spade', 'heart', 'diamond', 'club'];
 
-        for (let i = 0; i < suits.length; i++) { // loop through suits array
-            let character = '';
+        for (let i = 0; i < this.suits.length; i++) { // loop through suits array
+            let char = '';
             for (let j = 2; j <= 14; j++) { // loop through values array
                 switch (j) {
                     case 11:
-                        character = 'Joker'
+                        char = 'Joker'
                         break;
                     case 12:
-                        character = 'Queen'
+                        char = 'Queen'
                         break;
                     case 13:
-                        character = 'King'
+                        char = 'King'
                         break;
                     case 14:
-                        character = 'Ace'
+                        char = 'Ace'
                         break;
                     default:
-                        character = j
+                        char = j
                 }
 
-                let card = { // create a card object to push onto the deck array
-                    suit: suits[i],
+                this.card = { // create a card object to push onto the deck array
+                    suit: this.suits[i],
                     value: j,
-                    character: character
+                    character: char
                 }
 
-                cardDeck.push(card);
+                this.cardDeck.push(this.card);
             }
         }
-        console.log("deck before shuffle: " + JSON.stringify(cardDeck));
+    }
 
-
-        // shuffle deck
-        // Math.random gives a floating point >0 and <1
-        // Math.floor gives you a rounded up whole number
-        // Multiplying by array length will give you an index from 0 to the length of the array
-        // This is a the Fisher Yates Method for shuffling an array
-        // It shuffles the list in place starting with the last element of the array
-        // The last item becomes a random index value and the random index becomes what was in i, then it repeats with the next index to the left and so on till it reaches iindex 0
-        for (let i = cardDeck.length; i > 0; i--) {
+    // shuffle deck
+    // Math.random gives a floating point >0 and <1
+    // Math.floor gives you a rounded up whole number
+    // Multiplying by array length will give you an index from 0 to the length of the array
+    // This is a the Fisher Yates Method for shuffling an array
+    // It shuffles the list in place starting with the last element of the array
+    // The last item becomes a random index value and the random index becomes what was in i, then it repeats with the next index to the left and so on till it reaches iindex 0
+    shuffleDeck () {
+        for(let i = this.cardDeck.length; i > 0; i--) {
             var randomIndex = Math.floor(Math.random() * (i + 1))
-            var hold = cardDeck[i]; // save original value for swap
-            cardDeck[i] = cardDeck[randomIndex] // make current value of i = the random index's value
-            cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
+            var hold = this.cardDeck[i]; // save original value for swap
+            this.cardDeck[i] = this.cardDeck[randomIndex] // make current value of i = the random index's value
+            this.cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
         }
-        return cardDeck;
     }
 }
 
@@ -86,19 +85,20 @@ class Players {
 
 // main game logic
 let deck = new Deck; // create new instance of Deck
-// console.log("deck: " + JSON.stringify(deck.cardDeck));
-console.log("deck: " + JSON.stringify(cardDeck));
+deck.shuffleDeck();
+console.log("deck: " + JSON.stringify(deck.cardDeck));
+// console.log("deck stringify: " + JSON.parse(deck.cardDeck));
 
 
 let players = new Players;
-console.log("deck: " + deck.cardDeck);
-console.log("array length: " + deck.cardDeck.length);
+// console.log("deck: " + deck.cardDeck);
+// console.log("array length: " + deck.cardDeck.length);
 while (deck.cardDeck.length > 0) { // as long as there are cards in the deck
-    console.log("array length: " + deck.cardDeck.length);
+    // console.log("array length: " + deck.cardDeck.length);
     let one = deck.cardDeck.pop; // deal a card to player 1
     let two = deck.cardDeck.pop; // deal a card to player 2
-    console.log("one: " + one + ", two" + two);
-    deck.compareCards(one, two); // execute player compare method
+    // console.log("one: " + one + ", two" + two);
+    players.compareCards(one, two); // execute player compare method
 }
 
 // execute players determine winner method and display winner and total points for each player
