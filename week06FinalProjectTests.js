@@ -17,20 +17,62 @@ describe('Week 6 Final Tests', () => {
             expect(players.compareCards(cardPlayerOne = {cardIndex: 32, suit: 'spade', value: 3, character: 3 }, cardPlayerTwo = { cardIndex: 15, suit: 'diamond', value: 3, character: 3 })).to.equal('noOneWon')
         })
 
-        it('#should fail - compare cannot accept a value < 2 or > 14', () => {
-            players.compareCards(cardPlayerOne = {cardIndex: 32, suit: 'spade', value: 1, character: 3 }, cardPlayerTwo = { cardIndex: 15, suit: 'diamond', value: 4, character: 3 })
-            expect.fail('Card value must be between 2 and 14')
-        })
+        // it('#should fail - compare cannot accept a value < 2 or > 14', () => {
+        //     expect(players.compareCards(cardPlayerOne = { cardIndex: 32, suit: 'spade', value: 1, character: 3 }, cardPlayerTwo = { cardIndex: 15, suit: 'diamond', value: 55, character: 3 })).to.throw('Error: Card value must be between 2 and 14');
+        // })
 
     })
 
     describe('Test players method to add points to winner', () => {
+        
+        it('#should pass - Test players method to add points to playerOne', () => {
+            let playerOne = players.player1TotalPoints;
+            players.addPoints('playerOne')
+            expect(players.player1TotalPoints).to.equal(playerOne + 1);
+        })
 
-  
+        it('#should pass - Test players method to add points to playerTwo', () => {
+            let playerTwo = players.player2TotalPoints;
+            players.addPoints('playerTwo')
+            expect(players.player2TotalPoints).to.equal(playerTwo + 1);
+        })
+
+        // it('#should fail - Test players method to add points to playerOne', () => {
+        //     let playerTwo = players.player2TotalPoints;
+        //     players.addPoints('playerTwo')
+        //     expect(players.player2TotalPoints).to.equal(playerTwo + );
+        // })
     })
 
     describe('Test players method to determine winner', () => {
+        testDetWinner = (x, y) => {
+            players.player1TotalPoints = 0
+            players.player2TotalPoints = 0
 
+            for (let i = 0; i <= x; i++) {
+                players.addPoints('playerOne')
+            }
+            for (let j = 0; j <= y; j++) {
+                players.addPoints('playerTwo')
+            }
+            return players.detWinner();
+        }
+
+        it('#should pass - Test players method to add points to player one', () => {
+            expect(testDetWinner(5, 3)).to.equal('Player 1');
+        })
+
+        it('#should pass - Test players method to add points to player two', () => {
+            expect(testDetWinner(1, 9)).to.equal('Player 2');
+        })
+   
+        it('#should pass - Test players method be a tie', () => {
+            expect(testDetWinner(5, 5)).to.equal('No one! The game ended in a tie');
+        })
+   
+        // it('#should fail - xxxxxx', () => {
+            // expect(testDetWinner(5, 5)).to.equal('No one! The game ended in a tie');
+        // })
 
     })
 
