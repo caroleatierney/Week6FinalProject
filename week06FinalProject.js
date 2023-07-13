@@ -44,16 +44,12 @@ class Deck { // create initial deck
     // It shuffles the list in place starting with the last element of the array
     // The last item becomes a random index value and the random index becomes what was in i, then it repeats with the next index to the left and so on till it reaches iindex 0
     shuffleDeck () {
-
-
         for(let i = this.cardDeck.length - 1; i > 0; i--) {
             var randomIndex = Math.floor(Math.random() * (i + 1))
             var hold = this.cardDeck[i]; // save original value for swap
             this.cardDeck[i] = this.cardDeck[randomIndex] // make current value of i = the random index's value
             this.cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
-
             // [this.cardDeck[i], this.cardDeck[randomIndex]] = [this.cardDeck[randomIndex], this.cardDeck[i]]
-
         }
     }
 }
@@ -67,12 +63,17 @@ class Players {
     }
 
     compareCards(valuePlayerOne, valuePlayerTwo) {
-        if (valuePlayerOne.value === valuePlayerTwo.value) { // just keeping a tally if they are equal - no extra coding required
+        if (valuePlayerOne.value < 2 || valuePlayerTwo.value < 2 || valuePlayerOne.value > 14 || valuePlayerTwo.value > 14) { // error if values not 2-14
+            throw new Error('Card value must be between 2 and 14');
+        } else if (valuePlayerOne.value === valuePlayerTwo.value) { // just keeping a tally if they are equal - no extra coding required
             players.addPoints('noOneWon')
+            return 'noOneWon'; // included return for unit test validation
         } else if (valuePlayerOne.value > valuePlayerTwo.value) { // compare cards and update player 1 by one by one point if they won
             players.addPoints('playerOne');
+            return 'playerOne' // included return for unit test validation
         } else { // update player 2 by one by one point if they won
             players.addPoints('playerTwo');
+            return 'playerTwo' // included return for unit test validation
         }
     }
 
@@ -89,8 +90,10 @@ class Players {
     detWinner() {
         if (this.player1TotalPoints > this.player2TotalPoints) {
             return "Player 1";
-        } else {
+        } else if (this.player1TotalPoints < this.player2TotalPoints) { 
             return "Player 2";
+        } else {
+            return "No one! The game ended in a tie";
         }
     }
 }
