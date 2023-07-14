@@ -3,7 +3,6 @@ const assert = chai.assert
 
 describe('Week 6 Final Tests', () => {
     describe('Test players method to compare cards', () => {
-
         it('#should pass - compare playerOne is greater than playerTwo ', () => {
             expect(players.compareCards(cardPlayerOne = {cardIndex: 1, suit: 'spade', value: 9, character: 9}, cardPlayerTwo = {cardIndex: 2, suit: 'heart', value: 5, character: 5 })).to.equal('playerOne')
         });
@@ -16,15 +15,9 @@ describe('Week 6 Final Tests', () => {
         it('#should pass - compare playerOne is equal to playerTwo ', () => {
             expect(players.compareCards(cardPlayerOne = {cardIndex: 32, suit: 'spade', value: 3, character: 3 }, cardPlayerTwo = { cardIndex: 15, suit: 'diamond', value: 3, character: 3 })).to.equal('noOneWon')
         })
-
-        // it('#should fail - compare cannot accept a value < 2 or > 14', () => {
-        //     expect(players.compareCards(cardPlayerOne = { cardIndex: 32, suit: 'spade', value: 1, character: 3 }, cardPlayerTwo = { cardIndex: 15, suit: 'diamond', value: 55, character: 3 })).to.throw('Error: Card value must be between 2 and 14');
-        // })
-
     })
 
     describe('Test players method to add points to winner', () => {
-        
         it('#should pass - Test players method to add points to playerOne', () => {
             let playerOne = players.player1TotalPoints;
             players.addPoints('playerOne')
@@ -36,16 +29,10 @@ describe('Week 6 Final Tests', () => {
             players.addPoints('playerTwo')
             expect(players.player2TotalPoints).to.equal(playerTwo + 1);
         })
-
-        // it('#should fail - Test players method to add points to playerOne', () => {
-        //     let playerTwo = players.player2TotalPoints;
-        //     players.addPoints('playerTwo')
-        //     expect(players.player2TotalPoints).to.equal(playerTwo + );
-        // })
     })
 
     describe('Test players method to determine winner', () => {
-        testDetWinner = (x, y) => {
+        testDetWinner = (x, y) => { // local function used in tests
             players.player1TotalPoints = 0
             players.player2TotalPoints = 0
 
@@ -66,30 +53,39 @@ describe('Week 6 Final Tests', () => {
             expect(testDetWinner(1, 9)).to.equal('Player 2');
         })
    
-        it('#should pass - Test players method be a tie', () => {
+        it('#should pass - Test players method to be a tie', () => {
             expect(testDetWinner(5, 5)).to.equal('No one! The game ended in a tie');
         })
-   
-        // it('#should fail - xxxxxx', () => {
-            // expect(testDetWinner(5, 5)).to.equal('No one! The game ended in a tie');
-        // })
+     })
 
-    })
-
-    describe('Test while play game loop?', () => {
-
-
+    describe('Test play game empties cardDeck array during dealing', () => {
+        it('#should pass - Test all cards are dealt', () => {
+            let deck = new Deck; // creat new instance of Deck
+            deck.shuffleDeck(); // shuffle deck
+            let players = new Players; // create new instance of Players
+            expect(players.playGame()).to.equal(0); // deal cards and check cards were all dealt
+        })
     })
 
     describe('shuffle deck?', () => {
-
-
+        // Test not equal to original?
     })
 
-    describe('Test build deck?', () => {
+    describe('Test build deck', () => {
+        it('#should pass - Test all initial deck = 52 cards', () => {
+            let deck = new Deck; // creat new instance of Deck
+            expect(deck.cardDeck.length).to.equal(52); // check deck is 52
+        })
 
-
+        it('#should pass - test cards not < 2 or > 14', () => {
+            let deck = new Deck; // creat new instance of Deck
+            let cardValueErrors = 0;
+            for (let i = 0; i < deck.cardDeck.length; i++) { // loop through deck    
+                if (deck.cardDeck[i].value < 2 || deck.cardDeck.value > 14) {
+                    cardValueErrors ++;
+                }
+            }
+            expect(cardValueErrors).to.equal(0);
+        })
     })
-
 })
-

@@ -62,10 +62,8 @@ class Players {
         this.ties = 0;
     }
 
-    compareCards(valuePlayerOne, valuePlayerTwo) {
-        if (valuePlayerOne.value < 2 || valuePlayerTwo.value < 2 || valuePlayerOne.value > 14 || valuePlayerTwo.value > 14) { // error if values not 2-14
-            throw new Error('Card value must be between 2 and 14');
-        } else if (valuePlayerOne.value === valuePlayerTwo.value) { // just keeping a tally if they are equal - no extra coding required
+    compareCards(valuePlayerOne, valuePlayerTwo) { // compare cards to find winner
+        if (valuePlayerOne.value === valuePlayerTwo.value) { // just keeping a tally if they are equal - no extra coding required
             players.addPoints('noOneWon')
             return 'noOneWon'; // included return for unit test validation
         } else if (valuePlayerOne.value > valuePlayerTwo.value) { // compare cards and update player 1 by one by one point if they won
@@ -77,7 +75,7 @@ class Players {
         }
     }
 
-    addPoints(player) {
+    addPoints(player) { // add points to winner
         if (player == 'noOneWon') {
             this.ties++;
         } else if (player == 'playerOne') {
@@ -85,6 +83,16 @@ class Players {
         } else {
             this.player2TotalPoints++;
         }
+    }
+
+    playGame() { // play game
+        while(deck.cardDeck.length > 0) { // as long as there are cards in the deck
+            let one = deck.cardDeck.pop(); // deal a card to player 1
+            let two = deck.cardDeck.pop(); // deal a card to player 2
+            players.compareCards(one, two); // execute player compare method
+            console.log(`player one: ${one.value}, ${one.suit}\nplayer two: ${two.value}, ${two.suit}\n==================================`);
+        }
+        return deck.cardDeck.length; // for unit tests
     }
 
     detWinner() {
@@ -96,27 +104,25 @@ class Players {
             return "No one! The game ended in a tie";
         }
     }
+
+    displayWinner() {
+        // execute players determine winner method and display winner and total points for each player
+        alert(`
+        The winner is: ${this.detWinner()}!
+            - Player 1 had ${this.player1TotalPoints} and
+            - Player 2 had ${this.player2TotalPoints}
+        * There were ${this.ties} ties`);
+    }
 }
 
 // main game logic
 let deck = new Deck; // create new instance of Deck
 deck.shuffleDeck();
-let players = new Players;
 
-// play game
-while (deck.cardDeck.length > 0) { // as long as there are cards in the deck
-    let one = deck.cardDeck.pop(); // deal a card to player 1
-    let two = deck.cardDeck.pop(); // deal a card to player 2
-    players.compareCards(one, two); // execute player compare method
-    console.log(`player one: ${one.value}, ${one.suit}\nplayer two: ${two.value}, ${two.suit}\n==================================`);
-}
+let players = new Players; // create new instance of Players
+players.playGame(); // play game
 
-// execute players determine winner method and display winner and total points for each player
-alert(`
-The winner is: ${players.detWinner()}!
-  - Player 1 had ${players.player1TotalPoints} and
-  - Player 2 had ${players.player2TotalPoints}
-* There were ${players.ties} ties`); 
+players.displayWinner(); // determine and display winner
 
 // ===========================================================================================
 //                                      code graveyard
