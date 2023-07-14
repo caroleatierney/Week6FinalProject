@@ -74,7 +74,7 @@ class Players {
             return 'playerTwo' // included return for unit test validation
         }
     }
-
+// 
     addPoints(player) { // add points to winner
         if (player == 'noOneWon') {
             this.ties++;

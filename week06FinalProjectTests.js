@@ -1,5 +1,6 @@
 const expect = chai.expect
 const assert = chai.assert
+const should = chai.should
 
 describe('Week 6 Final Tests', () => {
     describe('Test players method to compare cards', () => {
@@ -66,11 +67,14 @@ describe('Week 6 Final Tests', () => {
         })
     })
 
+    // fix
     // describe('Shuffle deck', () => {
-    //     let deck = new Deck;
-    //     let saveDeck = deck;
-    //     deck.shuffleDeck(); // Test not equal to original?
-    //     expect(saveDeck).not.equal(deck);
+    //     it('#should pass - Test all initial deck = 52 cards', () => {
+    //         let deck = new Deck;
+    //         let saveDeck = deck;
+    //         deck.shuffleDeck(); // Test not equal to original?
+    //         assert(saveDeck).notEqual(deck);
+    //     })
     // })
 
     // describe('Test build deck', () => {
@@ -78,16 +82,18 @@ describe('Week 6 Final Tests', () => {
     //         let deck = new Deck; // creat new instance of Deck
     //         expect(deck.cardDeck.length).to.equal(52); // check deck is 52
     //     })
+    // })
 
-    //     it('#should pass - test cards not < 2 or > 14', () => {
-    //         let deck = new Deck; // creat new instance of Deck
-    //         let cardValueErrors = 0;
-    //         for (let i = 0; i < deck.cardDeck.length; i++) { // loop through deck    
-    //             if (deck.cardDeck[i].value < 2 || deck.cardDeck.value > 14) {
-    //                 cardValueErrors ++;
-    //             }
-    //         }
-    //         expect(cardValueErrors).to.equal(0);
-    //     })
+
+        // it('#should pass - test cards not < 2 or > 14', () => {
+        //     let deck = new Deck; // creat new instance of Deck
+        //     let cardValueErrors = 0;
+        //     for (let i = 0; i < deck.cardDeck.length; i++) { // loop through deck    
+        //         if (deck.cardDeck[i].value < 2 || deck.cardDeck.value > 14) {
+        //             cardValueErrors ++;
+        //         }
+        //     }
+        //     expect(cardValueErrors).to.equal(0);
+        // })
     // })
 })
