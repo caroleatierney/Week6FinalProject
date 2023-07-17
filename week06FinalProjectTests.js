@@ -76,9 +76,10 @@ describe('Week 6 Final Tests', () => {
         })
     })
 
-    describe('Test build deck', () => 
+    describe('Test build deck', () => {
 
-        //okay need to have pass finally. current test is a fail
+        // okay need to make a functopn and pass in values
+        // need to figure out negative - positives - this negative is goo to start
         it('#should pass - Test initial deck has 52 cards', () => {
             let deck = new Deck; // creat new instance of Deck
             expect(deck.cardDeck.length).to.equal(52); // check deck is 52
