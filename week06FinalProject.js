@@ -46,10 +46,15 @@ class Deck { // create initial deck
     shuffleDeck () {
         for(let i = this.cardDeck.length - 1; i > 0; i--) {
             var randomIndex = Math.floor(Math.random() * (i + 1))
-            var hold = this.cardDeck[i]; // save original value for swap
-            this.cardDeck[i] = this.cardDeck[randomIndex] // make current value of i = the random index's value
-            this.cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
-            // [this.cardDeck[i], this.cardDeck[randomIndex]] = [this.cardDeck[randomIndex], this.cardDeck[i]]
+            console.log("randomIndex: " + randomIndex)
+            console.log("i: " + this.cardDeck[i])
+            console.log("Random Index: " + this.cardDeck[randomIndex])
+
+            console.log("typeof i: " + this.cardDeck[i])
+            console.log("typeof randomIndex: " + this.cardDeck[randomIndex])
+
+            console.log("STOP HERE")
+            this.cardDeck[randomIndex], this.cardDeck[i] = this.cardDeck[i], this.cardDeck[randomIndex]
         }
     }
 }
