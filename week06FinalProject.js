@@ -46,7 +46,13 @@ class Deck { // create initial deck
     shuffleDeck () {
         for(let i = this.cardDeck.length - 1; i > 0; i--) {
             var randomIndex = Math.floor(Math.random() * (i + 1))
-            this.cardDeck[randomIndex], this.cardDeck[i] = this.cardDeck[i], this.cardDeck[randomIndex]
+            var hold = this.cardDeck[i]; // save original value for swap
+            this.cardDeck[i] = this.cardDeck[randomIndex] // make current value of i = the random index's value
+            this.cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
+            // [this.cardDeck[i], this.cardDeck[randomIndex]] = [this.cardDeck[randomIndex], this.cardDeck[i]]
+            // this.cardDeck[randomIndex], this.cardDeck[i] = this.cardDeck[i], this.cardDeck[randomIndex]  cannot get this to work!!!
+            // keep for debugging
+            // console.log(`i: ${i} - randomIndex: ${randomIndex} - SHUFFLED DECK CARD: ${this.cardDeck[i].value} -- ${this.cardDeck[i].suit}\n`);
         }
     }
 }
@@ -71,7 +77,7 @@ class Players {
             return 'playerTwo' // included return for unit test validation
         }
     }
-// 
+
     addPoints(player) { // add points to winner
         if (player == 'noOneWon') {
             this.ties++;
@@ -87,7 +93,8 @@ class Players {
             let one = deck.cardDeck.pop(); // deal a card to player 1
             let two = deck.cardDeck.pop(); // deal a card to player 2
             players.compareCards(one, two); // execute player compare method
-            console.log(`player one: ${one.value}, ${one.suit}\nplayer two: ${two.value}, ${two.suit}\n==================================`);
+            // keep for debugging
+            // console.log(`PLAY GAME: - player one: ${one.value}, ${one.suit} - player two: ${two.value}, ${two.suit}\n`);
         }
         return deck.cardDeck.length; // for unit tests
     }
@@ -120,46 +127,3 @@ let players = new Players; // create new instance of Players
 players.playGame(); // play game
 
 players.displayWinner(); // determine and display winner
-
-// ===========================================================================================
-//                                      code graveyard
-// ===========================================================================================
-
-// Print card table???
-// for (d = 0; d < deck.cardDeck.length - 1; d++) {
-    // console.log(deck.cardDeck[0].card.suit, deck.card.value, deck.card.character);
-    // console.table(deck.card)
-    // console.log(deck.cardDeck[d].card.character)
-    // console.log(deck.cardDeck[d].card)
-// }
-
-// console.log("deck before shuffle: " + JSON.stringify(deck.cardDeck));
-
-// [this.cardDeck[i], this.cardDeck[randomIndex]] = [this.cardDeck[randomIndex], this.cardDeck[i]];  why isn't this working?
-// console.log("deck AFTER shuffle: " + JSON.stringify(deck.cardDeck));
-
-// console.log("deck before pop stringify after shuffle: " + JSON.stringify(deck.cardDeck));
-// console.log("bef index; " + this.cardDeck[i].card);
-
-// console.log("deck stringify: " + JSON.stringify(deck.cardDeck));
-
-// console.log("in create suit: " + this.cardDeck[j].card.suit)
-// console.log("in create value: " + this.card.value)
-// console.log("in create character: " + this.card.character)
-
-// console.log(deck.cardDeck[d].card)
-// console.log("aft index: " + this.cardDeck[i]);
-// console.log("in shuffle suit: " + this.cardDeck[i].card.suit)
-// console.log("in shuffle value: " + this.card.value)
-// console.log("in shuffle character: " + this.card.character)
-
-// console.log("one: " + one.value + ", two: " + two.value);
-// players.compareCards(one.value, two.value); // execute player compare method
-// console.log("deck before shuffle: " + JSON.stringify(deck.cardDeck));
-// console.table(deck.card)
-
-// console.log("deck: " + deck.cardDeck);
-
-// console.log("array length bef: " + deck.cardDeck.length);
-// console.log("array length aft: " + deck.cardDeck.length);
-
