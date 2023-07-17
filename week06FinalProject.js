@@ -46,14 +46,6 @@ class Deck { // create initial deck
     shuffleDeck () {
         for(let i = this.cardDeck.length - 1; i > 0; i--) {
             var randomIndex = Math.floor(Math.random() * (i + 1))
-            console.log("randomIndex: " + randomIndex)
-            console.log("i: " + this.cardDeck[i])
-            console.log("Random Index: " + this.cardDeck[randomIndex])
-
-            console.log("typeof i: " + this.cardDeck[i])
-            console.log("typeof randomIndex: " + this.cardDeck[randomIndex])
-
-            console.log("STOP HERE")
             this.cardDeck[randomIndex], this.cardDeck[i] = this.cardDeck[i], this.cardDeck[randomIndex]
         }
     }

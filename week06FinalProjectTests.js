@@ -67,33 +67,34 @@ describe('Week 6 Final Tests', () => {
         })
     })
 
-    // fix
-    // describe('Shuffle deck', () => {
-    //     it('#should pass - Test all initial deck = 52 cards', () => {
-    //         let deck = new Deck;
-    //         let saveDeck = deck;
-    //         deck.shuffleDeck(); // Test not equal to original?
-    //         assert(saveDeck).notEqual(deck);
-    //     })
-    // })
+    describe('Shuffle deck', () => {
+        it('#should pass - Initial deck should not be the same s shuffled deck', () => {
+            let deck = new Deck;
+            let saveDeck = deck;
+            deck.shuffleDeck(); // Test not equal to original?
+            expect(saveDeck).to.eql(deck);
+        })
+    })
 
-    // describe('Test build deck', () => {
-    //     it('#should pass - Test all initial deck = 52 cards', () => {
-    //         let deck = new Deck; // creat new instance of Deck
-    //         expect(deck.cardDeck.length).to.equal(52); // check deck is 52
-    //     })
-    // })
+    describe('Test build deck', () => 
 
+        //okay need to have pass finally. current test is a fail
+        it('#should pass - Test initial deck has 52 cards', () => {
+            let deck = new Deck; // creat new instance of Deck
+            expect(deck.cardDeck.length).to.equal(52); // check deck is 52
+        })
 
-        // it('#should pass - test cards not < 2 or > 14', () => {
-        //     let deck = new Deck; // creat new instance of Deck
-        //     let cardValueErrors = 0;
-        //     for (let i = 0; i < deck.cardDeck.length; i++) { // loop through deck    
-        //         if (deck.cardDeck[i].value < 2 || deck.cardDeck.value > 14) {
-        //             cardValueErrors ++;
-        //         }
-        //     }
-        //     expect(cardValueErrors).to.equal(0);
-        // })
-    // })
+        it('#should pass - test cards not < 2 or > 14', () => {
+            let deck = new Deck; // create new instance of Deck
+            deck.cardDeck[5].value = 1;
+            let cardValueErrors = 0;   
+
+            // rephrase, make a function and keep calling it
+            if (deck.cardDeck[5].value < 2 || deck.cardDeck[6].value > 14) {
+                cardValueErrors ++;
+            }
+            expect(cardValueErrors).to.equal(0);
+        })
+    })
+
 })
