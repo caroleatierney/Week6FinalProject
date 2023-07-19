@@ -49,6 +49,7 @@ class Deck { // create initial deck
             var hold = this.cardDeck[i]; // save original value for swap
             this.cardDeck[i] = this.cardDeck[randomIndex] // make current value of i = the random index's value
             this.cardDeck[randomIndex] = hold // make value of the randomIndex equal to the original value of i
+            // tried to use the Durstenfeld shuffle algorithm, but can't get it to work
             // [this.cardDeck[i], this.cardDeck[randomIndex]] = [this.cardDeck[randomIndex], this.cardDeck[i]]
             // this.cardDeck[randomIndex], this.cardDeck[i] = this.cardDeck[i], this.cardDeck[randomIndex]  cannot get this to work!!!
             // keep for debugging
